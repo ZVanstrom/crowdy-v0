@@ -1,7 +1,3 @@
-I will now rework the content of your **README.md** to align with the branding of **Crowdy**. I'll update the project name, adjust descriptions, and tailor the features to fit Crowdy's contest-driven model while keeping the core structure and technical information in place.
-
----
-
 # Crowdy - A Dynamic Contest Platform
 
 **Crowdy** is a full-stack web application designed to facilitate user-generated contests. Built with a powerful backend using **Flask** and **PostgreSQL**, and a responsive frontend leveraging **React.js**, Crowdy enables participants to create contests, submit entries, vote on content, and receive payouts. The platform is designed to scale, offering a seamless and engaging user experience.
