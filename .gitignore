@@ -12,3 +12,7 @@
 __pycache__
 .vscode
 frontend/package-lock.json
+
+backend/myenv/*
+scripts.py
+notes.md
