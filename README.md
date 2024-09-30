@@ -1,152 +1,154 @@
-# Threaddit - a reddit clone
+I will now rework the content of your **README.md** to align with the branding of **Crowdy**. I'll update the project name, adjust descriptions, and tailor the features to fit Crowdy's contest-driven model while keeping the core structure and technical information in place.
 
-Threaddit is a full-stack Reddit clone; it's a comprehensive web application inspired by Reddit, built using Flask and its diverse libraries for the backend, combined with PostgreSQL for robust database management. The frontend is developed using React.js and its rich set of libraries, offering a seamless and dynamic user experience.
+---
 
-# Contents
+# Crowdy - A Dynamic Contest Platform
 
-- [Introduction](#introduction)
-- [Technologies](#technologies)
-  - [Backend](#backend)
-  - [Frontend](#frontend)
-  - [Database](#database)
-- [Features](#features)
-  - [User](#user)
-  - [Subthread](#subthread)
-  - [Posts Browsing](#posts-browsing)
-  - [Post](#post)
-  - [Comments](#comments)
-  - [Messages](#messages)
-- [Project Setup Instructions](#project-setup-instructions)
-  - [Database Setup](#database-setup)
-  - [Backend Setup](#backend-setup)
-  - [Running the Application](#running-the-application)
-  - [Access the Application](#access-the-application)
-- [Hosting](#hosting)
+**Crowdy** is a full-stack web application designed to facilitate user-generated contests. Built with a powerful backend using **Flask** and **PostgreSQL**, and a responsive frontend leveraging **React.js**, Crowdy enables participants to create contests, submit entries, vote on content, and receive payouts. The platform is designed to scale, offering a seamless and engaging user experience.
 
-# Introduction
+## Contents
 
-Threaddit is a personal portfolio project inspired by Reddit that replicates some of Reddit's core features. While not intended as a fully functional product, Threaddit serves as a demonstration of various web development skills and technologies.
+- Introduction
+- Technologies
+  - Backend
+  - Frontend
+  - Database
+- Core Features
+  - User Management
+  - Contest Creation
+  - Contest Participation & Voting
+  - Content Moderation & Reporting
+  - Payouts
+- Project Setup Instructions
+  - Database Setup
+  - Backend Setup
+  - Running the Application
+  - Accessing the Application
+- Deployment and Hosting
+- Contributing
+- License
 
-The backend of Threaddit is built with Flask, PostgreSQL, and several associated libraries for robust database management. On the frontend, React.js is used to create a dynamic and responsive user interface. The project also leverages additional technologies like tanstack/react-query, Axios, React Router Dom, Framer Motion, and PropTypes to enhance the overall user experience.
+## Introduction
 
-Please note that Threaddit is a work in progress, and features may be added or removed as the project evolves.
+Crowdy is a web-based platform that allows users to host and participate in creative contests. With a focus on community-driven content, Crowdy enables users to create challenges, vote on submissions, and receive rewards through a secure and transparent system.
 
-# Technologies
+This project showcases a scalable architecture using **Flask** and **PostgreSQL** for the backend and **React.js** for the frontend. The system is designed with flexibility in mind, offering a broad set of features that can be expanded upon as the platform grows.
 
-## Backend
+## Technologies
 
-For the backend of this project, a stack of versatile technologies has been employed. Python serves as the foundation, providing the flexibility and robustness necessary for web application development. The Flask framework, known for its simplicity and efficiency, has been instrumental in building the core structure. Additional libraries such as Flask Login, Flask Marshmallow, Flask SQLAlchemy, and Bcrypt have been integrated to enhance functionality, handle data, and ensure security. A full list is in requirements.txt.
+### Backend
 
-## Frontend
+Crowdy is powered by **Flask**, a lightweight and flexible web framework in **Python**. The backend handles all core functionalities, including user management, contest operations, and voting mechanisms. Some key backend components include:
 
-On the front end, the project leverages a stack of essential technologies and libraries. React.js, the cornerstone of the frontend, provides the foundation for building dynamic and responsive user interfaces. To handle data communication with the backend and manage application state effectively, the project incorporates "tanstack/react-query. Axios is also integrated for efficient API requests, while React Router Dom ensures seamless navigation within the application. For added interactivity and animations, Framer Motion is utilized, enhancing the overall user experience. The project also employs PropTypes for enhanced type checking and validation.
+- **Flask-Login** for authentication.
+- **Flask-SQLAlchemy** for ORM (Object-Relational Mapping).
+- **Flask-Marshmallow** for data serialization and validation.
+- **Bcrypt** for password security.
+- **PostgreSQL** as the relational database system.
 
-## Database
+### Frontend
 
-The project's backend relies on PostgreSQL, a robust and open-source relational database system, to effectively handle data storage and management. Details about the schema, views, and relationships can be found in the backend folder as an SQL file; the schema is shown below.
+The frontend of Crowdy is built using **React.js** to deliver a dynamic and responsive user interface. Key frontend libraries include:
 
-![Schema](https://github.com/StarKhan6368/threaddit/assets/77010375/8e60b685-e3a1-4a72-b219-61399fec79a5)
+- **Axios** for API requests.
+- **React Query** for server-side state management.
+- **React Router Dom** for seamless navigation between pages.
+- **Framer Motion** for smooth animations.
+- **PropTypes** for component validation.
 
-# Features
+### Database
 
-In this project, I've implemented a set of features, which are shown below. It's important to note that features may be added or removed depending on development progress and evolving project goals. Additionally, there are pending features currently in development, as this project remains a work in progress.
+Crowdy uses **PostgreSQL**, an open-source, robust relational database system, to manage all data, including user accounts, contests, submissions, votes, and payouts. The database schema is structured to optimize performance, particularly for high-traffic voting systems.
 
-## User
+## Core Features
 
-- [x] Login & Logout
-- [x] Register
-- [x] Edit Profile
-- [x] Delete Account
-- [ ] Email Verification
-- [ ] Password Change
-- [ ] Notifications
+### User Management
 
-## Subthread
+- **User Registration & Login**: Secure user authentication using email and password.
+- **Profile Editing**: Users can update their personal details and preferences.
+- **Account Deletion**: Users have control over their accounts with a simple deletion process.
+- **Email Verification**: Ensures users provide valid emails before participating in contests.
 
-- [x] Subthread Creation
-- [x] Subthread Edit (by Mod, Admin, and Creator)
-- [x] Subthread Moderation (by Mod and Admin)
-- [x] Join Subthread
-- [x] Leave Subthread
-- [x] Search Subthreads
-- [x] Subthread Logo and Descriptions
-- [ ] Banner & Rules
+### Contest Creation
 
-## Posts Browsing
+- **Create Contests**: Users can set up new contests, define rules, and invite participation.
+- **Edit Contests**: Contest owners have full control over contest details, including deadlines and rewards.
 
-- [x] Sort by Top, Hot, and New
-- [x] Sort by duration.
-- [x] Responsive Layout
-- [ ] Ability to change layout
-- [ ] Card and Gallery Layout
+### Contest Participation & Voting
 
-## Post
+- **Submit Entries**: Users can submit their work (e.g., media, text) to open contests.
+- **Vote on Entries**: Registered users can vote on contest submissions using predefined criteria (Top, Trending, Recent).
+- **Real-Time Voting Updates**: Users see live updates on votes for each entry.
 
-- [x] Post Creation
-- [x] Post Edit
-- [x] Post Delete (by Mod, Admin, and Creator)
-- [x] Post Save & Unsave
-- [x] Ability to add an image to a post
-- [x] Ability to add video and gifs
-- [ ] Report Posts
-- [x] Use Markdown instead of plain text.
+### Content Moderation & Reporting
 
-## Comments
+- **Report Inappropriate Content**: Users can flag contest entries for review by moderators.
+- **Automated Moderation**: Basic automated checks for inappropriate content using pre-defined filters.
+- **User Activity Limits**: Prevents spam by restricting user actions per contest.
 
-- [x] Create Comments
-- [x] Edit Comments & Edit Indicator
-- [x] Delete Comments
-- [x] Comment Tree with on-demand expansion
-- [ ] Media as Comment
-- [ ] Save Comments
-- [x] Use Markdown instead of plain text.
+### Payouts
 
-## Messages
-
-- [x] Send & Receive
-- [x] Message Seen Indicator
-- [ ] Delete Messages
-- [ ] Edit Messages
-- [ ] Send Media
+- **Automated Payouts**: Winners of contests receive their rewards automatically through integrated payment gateways.
+- **Prize Pools**: Contest organizers can define the reward structure, with options for tiered payouts.
 
 ## Project Setup Instructions
 
 ### Database Setup
 
-- Ensure that PostgreSQL is installed on your system.
-- Create a PostgreSQL database with a name of your choice.
-- Make sure you have the necessary credentials (username and password) for this database.
-- Details about the schema, views, and realtions can be found in the backend folder in a SQL file.
+1. Ensure **PostgreSQL** is installed on your system.
+2. Create a PostgreSQL database with the name of your choice.
+3. Store your database credentials (username, password, etc.) for configuring the backend.
 
 ### Backend Setup
 
-1. Navigate to the project's backend folder.
-
-2. Create a `.env` file in the backend folder and include the following environment variables:
-
-```env
-DATABASE_URI=your_postgresql_database_uri
-SECRET_KEY=your_flask_secret_key
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-```
-
-Replace the placeholder values with your specific credentials.
+1. Navigate to the project's `backend` folder.
+2. Create a `.env` file and add the following environment variables:
+   ```
+   DATABASE_URI=your_postgresql_database_uri
+   SECRET_KEY=your_flask_secret_key
+   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUDINARY_API_KEY=your_cloudinary_api_key
+   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   ```
+3. Install the required packages using:
+   ```
+   pip install -r requirements.txt
+   ```
+4. Run the application:
+   ```
+   python run.py
+   ```
 
 ### Running the Application
 
-1. With the database set up and the environment variables configured, execute the `run.py` file in the backend folder to start the Flask application.
-2. Open a terminal, navigate to the backend folder, and run: `python run.py`
+1. After setting up the database and backend, navigate to the frontend directory.
+2. Install frontend dependencies:
+   ```
+   npm install
+   ```
+3. Start the development server:
+   ```
+   npm start
+   ```
 
-This will start the Flask server.
+### Accessing the Application
 
-### Access the Application
+Once the application is running, open your web browser and navigate to `localhost:3000` to access the platform locally.
 
-- Once the Flask server is running, you can access the application by opening a web browser and navigating to the URL where it's hosted, or you can use `localhost` if you're running it locally.
+## Deployment and Hosting
 
-By following these steps, you should have the project up and running with the necessary database schema and environment variables configured. Make sure to replace the placeholder values with your actual credentials and API keys.
+Crowdy can be deployed on various cloud platforms, including **Heroku** or **AWS**. Instructions for deploying on these platforms will be provided in future updates. Currently, the app is set up for deployment using **Render.com**, which provides easy scalability for small projects.
 
-# Hosting
+## Contributing
 
-The project is currently hosted on [render.com](https://www.render.com), utilizing their free tier hosting service, primarily driven by financial considerations. The database, which is PostgreSQL, is hosted on Neon DB's free tier, ensuring data accessibility while staying within budget constraints. The project involves user-uploaded images, which are stored and served via Cloudinary's free tier, offering a reliable solution for handling media assets. For those interested in exploring the project, it's accessible at [threaddit.onrender.com](https://threaddit.onrender.com), providing a glimpse into this cost-effective yet functional web application.
+We welcome contributions from the community! To contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Commit your changes (`git commit -m "Add new feature"`).
+4. Push the branch to your fork.
+5. Create a pull request.
+
+## License
+
+Crowdy is open source under the **MIT License**. You are free to use, modify, and distribute this project as per the terms of the license.
