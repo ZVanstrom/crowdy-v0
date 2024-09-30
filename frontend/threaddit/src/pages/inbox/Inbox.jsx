@@ -21,14 +21,13 @@ export function Inbox() {
   useEffect(() => {
     if (curChat) {
       document.title = `Inbox | ${curChat.username}`;
-    }
-    else {
+    } else {
       document.title = "Threaddit | Inbox";
     }
     return () => {
       document.title = "Threaddit";
     };
-  })
+  });
   return (
     <div className="flex flex-1">
       {!curChat && (
@@ -38,11 +37,19 @@ export function Inbox() {
           </div>
           {data?.map((message) => (
             <li
-              className={`w-full flex items-center p-3 space-x-2 rounded-xl cursor-pointer ${curChat.username === message.sender.username ? "bg-blue-200" : "hover:bg-blue-200"
-                }`}
+              className={`w-full flex items-center p-3 space-x-2 rounded-xl cursor-pointer ${
+                curChat.username === message.sender.username
+                  ? "bg-blue-200"
+                  : "hover:bg-blue-200"
+              }`}
               key={message.message_id}
-              onClick={() => setCurChat(message.sender)}>
-              <img src={message.sender.avatar || avatar} className="object-cover w-14 h-14 rounded-full" alt="" />
+              onClick={() => setCurChat(message.sender)}
+            >
+              <img
+                src={message.sender.avatar || avatar}
+                className="object-cover w-14 h-14 rounded-full"
+                alt=""
+              />
               <div className="flex flex-col space-y-1 w-full">
                 <div className="flex justify-between items-center w-full">
                   <p className="font-medium">{message.sender.username}</p>
@@ -51,7 +58,9 @@ export function Inbox() {
                   )}
                 </div>
                 <p className="text-sm">
-                  {message.latest_from_user ? "You: " : `${message.receiver.username}: `}
+                  {message.latest_from_user
+                    ? "You: "
+                    : `${message.receiver.username}: `}
                   {message.content.slice(0, 15)}
                   {message.content.length > 15 ? "..." : ""}
                 </p>
@@ -69,11 +78,19 @@ export function Inbox() {
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.25, delay: index * 0.25 }}
-            className={`flex items-center w-full p-3 space-x-2 rounded-xl cursor-pointer ${curChat.username === message.sender.username ? "bg-blue-200" : "hover:bg-blue-200"
-              }`}
+            className={`flex items-center w-full p-3 space-x-2 rounded-xl cursor-pointer ${
+              curChat.username === message.sender.username
+                ? "bg-blue-200"
+                : "hover:bg-blue-200"
+            }`}
             key={message.message_id}
-            onClick={() => setCurChat(message.sender)}>
-            <img src={message.sender.avatar || avatar} className="object-cover w-14 h-14 rounded-full" alt="" />
+            onClick={() => setCurChat(message.sender)}
+          >
+            <img
+              src={message.sender.avatar || avatar}
+              className="object-cover w-14 h-14 rounded-full"
+              alt=""
+            />
             <div className="flex flex-col space-y-1 w-full">
               <div className="flex justify-between items-center w-full">
                 <p className="font-medium">{message.sender.username}</p>
@@ -82,7 +99,9 @@ export function Inbox() {
                 )}
               </div>
               <p className="text-sm">
-                {message.latest_from_user ? "You: " : `${message.receiver.username}: `}
+                {message.latest_from_user
+                  ? "You: "
+                  : `${message.receiver.username}: `}
                 {message.content.slice(0, 15)}
                 {message.content.length > 15 ? "..." : ""}
               </p>
@@ -92,7 +111,11 @@ export function Inbox() {
       </ul>
       <AnimatePresence>
         {curChat && (
-          <div className={`flex-1 m-2.5 bg-white rounded-md ${!curChat && "flex justify-center items-center"}`}>
+          <div
+            className={`flex-1 m-2.5 bg-white rounded-md ${
+              !curChat && "flex justify-center items-center"
+            }`}
+          >
             <Chat sender={curChat} setCurChat={setCurChat} />
           </div>
         )}
@@ -118,14 +141,19 @@ export function Chat({ sender, setCurChat, newChat = false }) {
   const { data, isFetching } = useQuery({
     queryKey: ["chat", sender.username],
     queryFn: async () => {
-      return await axios.get(`/api/messages/all/${sender.username}`).then((res) => res.data);
+      return await axios
+        .get(`/api/messages/all/${sender.username}`)
+        .then((res) => res.data);
     },
     enabled: sender.username !== undefined,
   });
   const { mutate } = useMutation({
     mutationFn: async (params) => {
       return await axios
-        .post("/api/messages", { content: params.message, receiver: params.sender.username })
+        .post("/api/messages", {
+          content: params.message,
+          receiver: params.sender.username,
+        })
         .then((res) => res.data);
     },
     onSuccess: (data) => {
@@ -136,7 +164,12 @@ export function Chat({ sender, setCurChat, newChat = false }) {
       queryClient.setQueryData(["inbox"], (oldData) => {
         return oldData.map((m) =>
           m.sender === sender
-            ? { ...m, content: data.content, created_at: data.created_a, message_id: data.message_id }
+            ? {
+                ...m,
+                content: data.content,
+                created_at: data.created_a,
+                message_id: data.message_id,
+              }
             : m
         );
       });
@@ -158,27 +191,42 @@ export function Chat({ sender, setCurChat, newChat = false }) {
   };
   return (
     <motion.div
-      className={`flex flex-col justify-between w-full ${newChat && "bg-white w-10/12 md:w-1/2"}`}
+      className={`flex flex-col justify-between w-full ${
+        newChat && "bg-white w-10/12 md:w-1/2"
+      }`}
       variants={AnimateChat}
       initial="hidden"
       animate="visible"
       transition={{ duration: 0.25 }}
-      exit={{ opacity: 0, x: 10, transition: { duration: 0.1 } }}>
+      exit={{ opacity: 0, x: 10, transition: { duration: 0.1 } }}
+    >
       <div className="flex justify-between items-center p-3 mx-2 border-b-2">
         <div className="flex items-center space-x-4">
-          <img src={sender.avatar || avatar} alt="" className="object-cover w-14 h-14 rounded-full" />
-          <Link to={`/u/${sender.username}`} className="text-xl font-semibold text-blue-500">
+          <img
+            src={sender.avatar || avatar}
+            alt=""
+            className="object-cover w-14 h-14 rounded-full"
+          />
+          <Link
+            to={`/u/${sender.username}`}
+            className="text-xl font-semibold text-blue-500"
+          >
             {sender.username}
           </Link>
         </div>
         <button
           onClick={() => setCurChat(false)}
-          className="justify-self-end p-2 ml-auto text-white bg-blue-600 rounded-md">
+          className="justify-self-end p-2 ml-auto text-white bg-blue-600 rounded-md"
+        >
           Close
         </button>
       </div>
       {isFetching ? (
-        <div className={`${newChat ? "h-[20vh]" : "md:h-[61vh] h-[70vh]"} flex justify-center items-center`}>
+        <div
+          className={`${
+            newChat ? "h-[20vh]" : "md:h-[61vh] h-[70vh]"
+          } flex justify-center items-center`}
+        >
           <Loader forPosts={true} />
         </div>
       ) : (
@@ -199,7 +247,8 @@ export function Chat({ sender, setCurChat, newChat = false }) {
           e.preventDefault();
           mutate({ message, sender });
         }}
-        className="flex justify-between items-center p-4 w-full bg-blue-200">
+        className="flex justify-between items-center p-4 w-full bg-blue-200"
+      >
         <input
           type="text"
           className="p-2 px-4 mx-3 w-full font-medium rounded-full focus:outline-none"
@@ -207,7 +256,11 @@ export function Chat({ sender, setCurChat, newChat = false }) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <Svg onClick={() => mutate({ message, sender })} type="send" className="w-8 h-8 text-white bg-inherit" />
+        <Svg
+          onClick={() => mutate({ message, sender })}
+          type="send"
+          className="w-8 h-8 text-white bg-inherit"
+        />
       </form>
     </motion.div>
   );
@@ -225,10 +278,16 @@ function Message({ message, toUser, messageIndex }) {
       initial={{ opacity: 0, x: toUser ? 100 : -100 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.25, delay: messageIndex * 0.1 }}
-      className={` pl-2 py-1 w-fit rounded-md ${message.seen ? "bg-green-100" : "bg-blue-100"} ${toUser ? "ml-auto pr-2" : "pr-10"
-        }`}>
-      <p className={`break-all pt-1 font-medium ${toUser && "pl-1"}`}>{message.content}</p>
-      <p className={`mt-0.5 text-xs font-light ${toUser && "text-right"}`}>{sentDate.toLocaleString()}</p>
+      className={` pl-2 py-1 w-fit rounded-md ${
+        message.seen ? "bg-green-100" : "bg-blue-100"
+      } ${toUser ? "ml-auto pr-2" : "pr-10"}`}
+    >
+      <p className={`break-all pt-1 font-medium ${toUser && "pl-1"}`}>
+        {message.content}
+      </p>
+      <p className={`mt-0.5 text-xs font-light ${toUser && "text-right"}`}>
+        {sentDate.toLocaleString()}
+      </p>
     </motion.li>
   );
 }

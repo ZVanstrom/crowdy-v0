@@ -38,7 +38,10 @@ export function Profile() {
     }
   }, [action, data, username, logout]);
 
-  useEffect(() => { document.title = "u/" + username; return () => document.title = "Threaddit" }, [username]);
+  useEffect(() => {
+    document.title = "u/" + username;
+    return () => (document.title = "Threaddit");
+  }, [username]);
   return (
     <div className="flex flex-col flex-1 items-center w-full bg-theme-cultured">
       {userIsFetching ? (
@@ -62,11 +65,20 @@ export function Profile() {
                 }
               />
               <div className="flex flex-col flex-1 items-center w-full md:p-2">
-                <h1 className="mt-2 text-lg font-semibold md:m-0">u/{data.username}</h1>
-                <p className="my-4 w-11/12 text-sm text-center md:my-2 md:text-base">{data?.bio}</p>
+                <h1 className="mt-2 text-lg font-semibold md:m-0">
+                  u/{data.username}
+                </h1>
+                <p className="my-4 w-11/12 text-sm text-center md:my-2 md:text-base">
+                  {data?.bio}
+                </p>
                 <div className="flex justify-between items-center w-full md:w-11/12">
-                  <p className="text-xs md:text-sm">Karma: {data?.karma.user_karma}</p>
-                  <p className="text-xs md:text-sm">Cake Day On: {new Date(data?.registrationDate).toDateString()}</p>
+                  <p className="text-xs md:text-sm">
+                    Karma: {data?.karma.user_karma}
+                  </p>
+                  <p className="text-xs md:text-sm">
+                    Cake Day On:{" "}
+                    {new Date(data?.registrationDate).toDateString()}
+                  </p>
                 </div>
               </div>
             </div>
@@ -86,7 +98,8 @@ export function Profile() {
               id="options"
               className="p-2 mt-2 bg-white rounded-md border-2"
               value={action}
-              onChange={(e) => setAction(e.target.value)}>
+              onChange={(e) => setAction(e.target.value)}
+            >
               <option value={false}>Choose an action</option>
               {user.username === data?.username && (
                 <>

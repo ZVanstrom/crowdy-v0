@@ -11,9 +11,14 @@ export function Feed() {
     return navigate("/login");
   }
   useEffect(() => {
-    document.title = `Threaddit | ${feedName}`
-  }, [feedName])
-  return <InfinitePostsLayout linkUrl={`posts/${feedName || "all"}`} apiQueryKey={feedName} />;
+    document.title = `Threaddit | ${feedName}`;
+  }, [feedName]);
+  return (
+    <InfinitePostsLayout
+      linkUrl={`posts/${feedName || "all"}`}
+      apiQueryKey={feedName}
+    />
+  );
 }
 
 export default Feed;
